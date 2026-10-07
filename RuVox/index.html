@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RuVox — быстрая озвучка русских текстов, локально</title>
+    <meta
+      name="description"
+      content="RuVox — desktop-приложение для быстрого прослушивания текстов и статей на русском языке. Локально, без GPU и облака: три TTS-движка и нормализация английских терминов, кода, чисел и ссылок."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <script>
+      // Runs before first paint so a stored theme choice does not flash.
+      try {
+        var storedTheme = localStorage.getItem("ruvox-theme");
+        if (storedTheme === "light" || storedTheme === "dark") {
+          document.documentElement.dataset.theme = storedTheme;
+        }
+      } catch (error) {
+        /* localStorage unavailable (private mode, file://) — keep the default. */
+      }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xilec.github.io/RuVox/" />
+    <meta property="og:title" content="RuVox — быстрая озвучка русских текстов, локально" />
+    <meta
+      property="og:description"
+      content="Прослушать статью вместо чтения: локальный синтез речи для русского языка, нормализация английских терминов и кода, подсветка читаемого слова."
+    />
+    <meta property="og:image" content="https://xilec.github.io/RuVox/assets/screenshot.png" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="./">
+          <img src="assets/logo.svg" width="36" height="36" alt="" />
+          <span>RuVox</span>
+        </a>
+        <div class="header-tools">
+          <nav class="header-nav">
+            <a href="#samples">Примеры озвучки</a>
+            <a href="#install">Установка</a>
+            <a href="https://github.com/xilec/RuVox">GitHub</a>
+          </nav>
+          <div class="theme-switch" role="group" aria-label="Оформление">
+            <button type="button" data-theme-value="system" aria-pressed="true">Авто</button>
+            <button type="button" data-theme-value="light" aria-pressed="false">Светлая</button>
+            <button type="button" data-theme-value="dark" aria-pressed="false">Тёмная</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <h1>Прослушать статью вместо чтения</h1>
+        <p class="lead">
+          RuVox — desktop-приложение для быстрого прослушивания текстов и статей на русском
+          языке. Синтез полностью локальный: без GPU, без облака, текст никуда не отправляется.
+        </p>
+        <p class="lead-sub">
+          Задача — временно снять нагрузку с глаз. Оригинал остаётся перед глазами, текущее слово
+          подсвечивается, а непонятный на слух фрагмент можно тут же уточнить по тексту.
+        </p>
+        <div class="actions">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/xilec/RuVox/releases/latest"
+            >Скачать</a
+          >
+          <a class="btn btn-ghost" href="https://github.com/xilec/RuVox">Исходный код</a>
+        </div>
+        <ul class="badges">
+          <li>Windows 10/11 и Linux</li>
+          <li>Три TTS-движка</li>
+          <li>Модели скачиваются по запросу</li>
+        </ul>
+      </section>
+
+      <section class="wrap section">
+        <img
+          class="shot"
+          src="assets/screenshot.png"
+          width="1440"
+          height="950"
+          alt="Окно RuVox: очередь записей слева, текст статьи с подсвеченным словом и панель воспроизведения сверху"
+        />
+      </section>
+
+      <section class="wrap section" id="samples">
+        <h2>Примеры озвучки</h2>
+        <p class="section-lead">
+          Один и тот же фрагмент технической статьи, прочитанный тремя движками. Аудио
+          загружается только после нажатия кнопки воспроизведения.
+        </p>
+
+        <blockquote class="source-text">
+          <h3>Тёмная сторона инлайнинга и мономорфизации</h3>
+          <p>
+            Я чувствовал себя умным. Потратив неделю на разработку инкрементального лексера,
+            который позволил бы pdx.tools десериализовать распакованные сохранения с постоянным
+            потреблением памяти, я был в восторге от интеграции. Я очень старательно работал над
+            созданием оптимизированного десериализатора serde, который бы извлекал данные из
+            одолжительного (lending), инкрементального лексера без тех недостатков
+            производительности, что видны в serde_json.
+          </p>
+        </blockquote>
+
+        <div class="samples">
+          <article class="sample">
+            <div class="sample-head">
+              <h3>Piper</h3>
+              <span class="voice">голос «Руслан»</span>
+            </div>
+            <audio controls preload="metadata" src="assets/samples/piper-ruslan.wav"></audio>
+            <a class="sample-dl" href="assets/samples/piper-ruslan.wav" download
+              >Скачать WAV</a
+            >
+          </article>
+
+          <article class="sample">
+            <div class="sample-head">
+              <h3>Silero Native</h3>
+              <span class="voice">голос «Айдар»</span>
+            </div>
+            <audio controls preload="metadata" src="assets/samples/silero-native-aidar.wav"></audio>
+            <a class="sample-dl" href="assets/samples/silero-native-aidar.wav" download
+              >Скачать WAV</a
+            >
+          </article>
+
+          <article class="sample">
+            <div class="sample-head">
+              <h3>Silero Native</h3>
+              <span class="voice">голос «Ксения»</span>
+            </div>
+            <audio
+              controls
+              preload="metadata"
+              src="assets/samples/silero-native-kseniya.wav"
+            ></audio>
+            <a class="sample-dl" href="assets/samples/silero-native-kseniya.wav" download
+              >Скачать WAV</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section class="wrap section" id="normalization">
+        <h2>Нормализация</h2>
+        <p class="section-lead">
+          Быстрые лёгкие движки читают только русский текст: английские слова, код и спецсимволы
+          они произнести не могут, а пропускать фрагменты — значит терять смысл. Поэтому перед
+          озвучкой RuVox переписывает текст так, чтобы он звучал естественно.
+        </p>
+        <div class="norm">
+          <div class="norm-row">
+            <code>getUserData()</code>
+            <span>гет юзер дата</span>
+          </div>
+          <div class="norm-row">
+            <code>user_id</code>
+            <span>юзер ай ди</span>
+          </div>
+          <div class="norm-row">
+            <code>API</code>
+            <span>эй пи ай</span>
+          </div>
+          <div class="norm-row">
+            <code>v1.2.3</code>
+            <span>один точка два точка три</span>
+          </div>
+          <div class="norm-row">
+            <code>2024-05-12</code>
+            <span>двенадцатое мая две тысячи двадцать четвёртого года</span>
+          </div>
+          <div class="norm-row">
+            <code>user@example.com</code>
+            <span>юзер собака экзампл точка ком</span>
+          </div>
+          <div class="norm-row">
+            <code>!=</code>
+            <span>не равно</span>
+          </div>
+          <div class="norm-row">
+            <code>-&gt;</code>
+            <span>стрелка</span>
+          </div>
+        </div>
+        <p class="section-note">
+          Блоки кода по умолчанию заменяются фразой «далее следует пример кода на пайтон», в режиме
+          «Читать полностью» проговариваются целиком. Результат видно в диалоге предпросмотра до
+          синтеза: слева оригинал, справа то, что будет прочитано вслух.
+        </p>
+      </section>
+
+      <section class="wrap section" id="features">
+        <h2>Возможности</h2>
+        <ul class="features">
+          <li>
+            <strong>Сверка с текстом.</strong> Синхронная подсветка читаемого слова: непонятный на
+            слух фрагмент можно тут же уточнить по оригиналу.
+          </li>
+          <li>
+            <strong>Markdown и HTML.</strong> Формат источника определяется автоматически: из HTML
+            извлекается читаемый текст, разметка Markdown обрабатывается по смыслу, а не зачитывается
+            посимвольно.
+          </li>
+          <li>
+            <strong>Импорт из файлов и по ссылке.</strong> Drag-n-drop <code>.txt</code>,
+            <code>.md</code>, <code>.html</code> и ссылок в окно; кодировка (UTF-8, CP1251, KOI8-R и
+            другие) определяется автоматически, с ручным переопределением.
+          </li>
+          <li>
+            <strong>Mermaid-диаграммы.</strong> В интерфейсе рисуются, в озвучке заменяются фразой
+            «Тут мермэйд диаграмма».
+          </li>
+          <li>
+            <strong>Экспорт аудио.</strong> «Сохранить аудио как…» — WAV или Ogg Opus; параметры
+            записи (движок, голос, настройки) видны в контекстном меню очереди.
+          </li>
+          <li>
+            <strong>Скорость до 3×.</strong> Сохраняется между запусками; системный трей,
+            уведомления и интерфейс на русском и английском.
+          </li>
+        </ul>
+      </section>
+
+      <section class="wrap section" id="install">
+        <h2>Установка</h2>
+        <p class="section-lead">
+          Готовые сборки — в
+          <a href="https://github.com/xilec/RuVox/releases">Releases</a>.
+        </p>
+        <div class="install">
+          <article class="card">
+            <h3>Windows 10 22H2+ / 11</h3>
+            <p class="file"><code>*-setup.exe</code></p>
+            <p>
+              NSIS-установщик. WebView2, mpv и ONNX Runtime встроены, автообновление из приложения.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Debian / Ubuntu</h3>
+            <p class="file"><code>*.deb</code></p>
+            <p>
+              <code>sudo dpkg -i ./ruvox_*.deb</code>. Системный mpv ставится автоматически как
+              зависимость, обновляется вместе с системой.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Любой дистрибутив Linux</h3>
+            <p class="file"><code>*.AppImage</code></p>
+            <p>
+              Запускается напрямую (нужен FUSE; там, где его нет, —
+              <code>--appimage-extract-and-run</code>). mpv встроен, автообновление из приложения.
+            </p>
+          </article>
+        </div>
+        <p class="section-note">
+          Голосовая модель движка скачивается по запросу при первом использовании (для Silero Native
+          — бандл ~230 МБ). Нужны Windows 10 22H2+ / 11 (x86_64) либо Linux с X11 или Wayland
+          (Ubuntu 24.04+, Debian 13+, Fedora 40+, Arch).
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>RuVox — код под GPL-3.0, голосовая модель Silero Native — CC BY-NC-SA 4.0.</span>
+        <nav>
+          <a href="https://github.com/xilec/RuVox">GitHub</a>
+          <a href="https://github.com/xilec/RuVox/releases">Releases</a>
+          <a href="https://github.com/xilec/RuVox/issues">Issues</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var STORAGE_KEY = "ruvox-theme";
+        var root = document.documentElement;
+        var buttons = document.querySelectorAll(".theme-switch button");
+
+        function storedTheme() {
+          try {
+            var value = localStorage.getItem(STORAGE_KEY);
+            return value === "light" || value === "dark" ? value : "system";
+          } catch (error) {
+            return "system";
+          }
+        }
+
+        function applyTheme(value) {
+          root.dataset.theme = value;
+          buttons.forEach(function (button) {
+            button.setAttribute("aria-pressed", String(button.dataset.themeValue === value));
+          });
+          try {
+            if (value === "system") {
+              localStorage.removeItem(STORAGE_KEY);
+            } else {
+              localStorage.setItem(STORAGE_KEY, value);
+            }
+          } catch (error) {
+            /* Choice simply will not persist. */
+          }
+        }
+
+        buttons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            applyTheme(button.dataset.themeValue);
+          });
+        });
+
+        applyTheme(storedTheme());
+      })();
+    </script>
+  </body>
+</html>
